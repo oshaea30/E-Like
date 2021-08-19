@@ -1,5 +1,5 @@
-Check out [FRONTEND LIVE DEMO](https://e-like.herokuapp.com/) here!!
-Check out [API LIVE DEMO]("") here!!
+Check out [FRONTEND LIVE DEMO](https://e-like-frontend.herokuapp.com/) here!!
+Check out [API LIVE DEMO]("https://e-like-backend.herokuapp.com/") here!!
 ## Tech used
 ```
 * Frontend : React & Redux
@@ -20,7 +20,7 @@ pip install -r requirements.txt
 python manage.py makemigrations
 python manage.py migrate
 python manage.py runserver
-# Open http://127.0.0.1:8000/posts/
+# Open http://127.0.0.1:8000/users/
 ```
 3. Frontend setting
 ```
