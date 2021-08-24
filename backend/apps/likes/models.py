@@ -15,6 +15,6 @@ class Like(models.Model):
     created_at = models.DateTimeField(
         'Created Datetime', blank=True, auto_now=True
     )
-    modified_at = models.DateTimeField(
-        'Modified Date Time', blank=True, auto_now=True
+    updated_at = models.DateTimeField(
+        'Update Date', blank=True, auto_now=True
     )
