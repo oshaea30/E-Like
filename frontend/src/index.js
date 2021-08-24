@@ -1,21 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import createStore from './reducks/store/store';
+import './index.css';
 import App from './App';
-import { Provider } from 'react-redux';
-import { ConnectedRouter } from 'connected-react-router';
 import reportWebVitals from './reportWebVitals';
-import * as History from 'history';
-
-const history = History.createBrowserHistory();
-export const store = createStore(history);
 
 ReactDOM.render(
-  <Provider store={store}>
-    <ConnectedRouter history={history}>
-      <App />
-    </ConnectedRouter>
-  </Provider>,
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
   document.getElementById('root')
 );
 

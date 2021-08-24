@@ -10,8 +10,3 @@ class LikeSerializer(serializers.ModelSerializer):
         model = Likes
         fields = '__all__'
 
-class LikeAddSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Likes
-        fields = '__all__'
