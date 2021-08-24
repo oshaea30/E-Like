@@ -1,5 +1,5 @@
 Check out [FRONTEND LIVE DEMO](https://e-like-frontend.herokuapp.com/) here!!
-Check out [API LIVE DEMO]("https://e-like-backend.herokuapp.com/") here!!
+Check out [API LIVE DEMO](https://e-like-backend.herokuapp.com/) here!!
 ## Tech used
 ```
 * Frontend : React & Redux
