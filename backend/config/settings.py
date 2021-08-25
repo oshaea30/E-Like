@@ -49,6 +49,9 @@ INSTALLED_APPS = [
     'cloudinary',
     'django_filters',
     'apps.users',
+    'apps.likes',
+    'apps.match',
+    'apps.chat',
 ]
 
 MIDDLEWARE = [

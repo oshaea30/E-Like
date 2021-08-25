@@ -1,6 +1,6 @@
 from .models import Likes 
 from rest_framework import serializers
-import datetime
+
 
 class LikeSerializer(serializers.ModelSerializer):
     send_user_id = serializers.IntegerField(read_only=True)

@@ -5,7 +5,7 @@ from .models import Chat
 
 class ChatList(generics.ListAPIView):
     # Get all posts, limit = 20
-    queryset = Chat.objects.order_by('created_at').reverse().all()[:20]
+    queryset = Chat.objects.order_by('id').reverse().all()[:20]
     serializer_class = ChatSerializer
 
 
