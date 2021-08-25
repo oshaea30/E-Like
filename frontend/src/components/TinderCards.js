@@ -1,6 +1,6 @@
 import React, {useState, useEffect } from 'react'
 import TinderCard from 'react-tinder-card'
-import './TinderCards.css'
+import '../assets/TinderCards.css'
 
 
 
