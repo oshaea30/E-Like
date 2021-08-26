@@ -1,11 +1,10 @@
 from django.db import models
 from cloudinary.models import CloudinaryField
+from config.constants import *
 
-
-    
 
 class User(models.Model):
-    class Meta(object):  
+    class Meta(object):
         db_table = 'user'
 
     username = models.CharField(
@@ -21,7 +20,7 @@ class User(models.Model):
         "Profile Picture", blank=True, null=True
     )
     gender = models.CharField(
-        'Gender', blank=False, null=False, db_index=True, max_length=15
+        'Gender', blank=False, null=False, db_index=True, max_length=15, choices=GENDER
     )
     token = models.CharField(
         'Token', blank=True, null=True, max_length=500, db_index=True
@@ -35,4 +34,3 @@ class User(models.Model):
     updated_at = models.DateTimeField(
         'Update Date', blank=True, auto_now=True
     )
-    
