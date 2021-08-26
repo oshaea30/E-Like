@@ -4,23 +4,27 @@ from rest_framework.response import Response
 from .serializers import UserSerializer, UserSignUpSerializer, UserSignInSerializer
 from django.http import JsonResponse
 from .models import User
+from apps.matches.models import Match
+from apps.likes.models import Like
 from .mixins import CustomLoginRequiredMixin
+from django.db.models import Q
 
 
-# Create your views here.
 class UserList(generics.ListAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
 
 class UserSignUp(generics.CreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSignUpSerializer
 
+
 class UserSignIn(generics.CreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSignInSerializer
 
-# If the class requires the log in status, call CustomLoginRequiredMixin
+
 class UserCheckLogin(CustomLoginRequiredMixin, generics.RetrieveAPIView):
 
     def get(self, request, *args, **kwargs):
@@ -29,6 +33,22 @@ class UserCheckLogin(CustomLoginRequiredMixin, generics.RetrieveAPIView):
         serializer = UserSerializer([request.login_user], many=True)
         return Response(serializer.data[0])
 
+
 class UserList(CustomLoginRequiredMixin, generics.ListAPIView):
-    queryset = User.objects.all()[:20]
     serializer_class = UserSerializer
+
+    def get(self, request, *args, **kwargs):
+        # The opposite gender of the logged-in user
+        search_gender = "male"
+        if request.login_user.gender == "male":
+            search_gender = "female"
+
+        # List of like users
+        exclude_user_id_list = []
+        likes = Like.objects.filter(send_user_id=request.login_user.id)
+        for like in likes:
+            exclude_user_id_list.append(like.receive_user_id.id)
+
+        # Set Search Conditions
+        self.queryset = User.objects.filter(gender=search_gender).exclude(id__in=exclude_user_id_list).all()
+        return self.list(request, *args, **kwargs)

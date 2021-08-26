@@ -1,8 +1,9 @@
 from .models import User
 from rest_framework import serializers
 from django.contrib.auth.hashers import make_password, check_password
-from secrets import token_hex  
-import datetime 
+from secrets import token_hex
+import datetime
+
 
 class UserSerializer(serializers.ModelSerializer):
     main_image = serializers.ImageField(required=True)
@@ -10,38 +11,43 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('username','main_image', 'gender', 'email', 'password', 'token', 'token_expires')
+        fields = ('username', 'main_image', 'gender', 'email', 'password', 'token', 'token_expires')
+
 
 class UserSignUpSerializer(serializers.ModelSerializer):
-    password = serializers.CharField(write_only=True)
-    token = serializers.CharField(read_only=True)
-    token_expires = serializers.DateTimeField(read_only=True)
-
-    class Meta:
-       model = User 
-       fields = ('username','main_image', 'gender', 'email', 'password', 'token', 'token_expires')
-   
-       # Overide the create method 
-    def create(self, validate_data):
-        #Encrypt the password
-        validate_data['password'] = make_password(validate_data['password'])
-   
-        #Create a token 
-        validate_data['token'] = token_hex(30)
-        validate_data['token_expires'] = datetime.datetime.now() + datetime.timedelta(days=7)
-   
-        return super().create(validate_data)
-   
-class UserSignInSerializer(serializers.ModelSerializer):
-    username = serializers.CharField(read_only=True)
-    email = serializers.EmailField()
+    main_image = serializers.ImageField(required=True)
     password = serializers.CharField(write_only=True)
     token = serializers.CharField(read_only=True)
     token_expires = serializers.DateTimeField(read_only=True)
 
     class Meta:
         model = User
-        fields = ('username', 'email', 'password', 'token', 'token_expires_at')
+        fields = ('username', 'main_image', 'gender', 'email', 'password', 'token', 'token_expires')
+
+    # Overide the create method
+    def create(self, validate_data):
+        # Encrypt the password
+        validate_data['password'] = make_password(validate_data['password'])
+
+        # Create a token
+        validate_data['token'] = token_hex(30)
+        validate_data['token_expires'] = datetime.datetime.now() + datetime.timedelta(days=7)
+
+        return super().create(validate_data)
+
+
+class UserSignInSerializer(serializers.ModelSerializer):
+    username = serializers.CharField(read_only=True)
+    email = serializers.EmailField()
+    password = serializers.CharField(write_only=True)
+    main_image = serializers.ImageField(read_only=True)
+    gender = serializers.CharField(read_only=True)
+    token = serializers.CharField(read_only=True)
+    token_expires = serializers.DateTimeField(read_only=True)
+
+    class Meta:
+        model = User
+        fields = ('username', 'email', 'password', 'gender', 'main_image', 'token', 'token_expires')
 
     # Override the create method
     def create(self, validated_data):
