@@ -46,12 +46,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'apps.posts',
-    'cloudinary',
-    'django_filters',
     'apps.users',
     'apps.likes',
-    'apps.match',
-    'apps.chat',
+    'apps.matches',
+    'apps.chats',
+    'cloudinary',
+    'django_filters',
 ]
 
 MIDDLEWARE = [

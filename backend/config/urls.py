@@ -20,7 +20,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('posts/', include('apps.posts.urls')),
     path('users/', include('apps.users.urls')),
-    path('chat/', include('apps.chat.urls')),
+    path('chat/', include('apps.chats.urls')),
     path('likes/', include('apps.likes.urls')),
-    path('match/', include('apps.match.urls')),
+    path('matches/', include('apps.matches.urls')),
 ]

@@ -1,4 +1,4 @@
 from django.contrib import admin
-from .models import Likes
+from .models import Like
 
-admin.site.register(Likes)
+admin.site.register(Like)
