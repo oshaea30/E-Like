@@ -4,10 +4,8 @@ from rest_framework.response import Response
 from .serializers import UserSerializer, UserSignUpSerializer, UserSignInSerializer
 from django.http import JsonResponse
 from .models import User
-from apps.matches.models import Match
 from apps.likes.models import Like
 from .mixins import CustomLoginRequiredMixin
-from django.db.models import Q
 
 
 class UserList(generics.ListAPIView):
