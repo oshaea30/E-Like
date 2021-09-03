@@ -11,6 +11,7 @@ const api = axios.create({
   baseURL: baseURL,
   headers: {
     "Content-Type": "application/json",
+    "Authorization": "hak-token"
   },
 });
 
@@ -49,6 +50,17 @@ export default class API {
             })
             .catch((error) => {
                 throw new Error(error)
+            })
+        return response
+    }
+    getUsers = async () => {
+        const response = await api
+            .get('/users/')
+            .then((response) => {
+                return response.data
+            })
+            .catch((err) => {
+                throw new Error(err)
             })
         return response
     }

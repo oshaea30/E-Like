@@ -1,6 +1,9 @@
 const initialState = { 
     posts: {
         list: []
+    },
+    users: {
+        list: []
     }
 };
 
