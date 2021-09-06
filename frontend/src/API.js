@@ -1,4 +1,5 @@
 import axios from "axios";
+const LOGIN_USER_KEY = "E_LIKE_LOGIN_USER_KEY";
 
 var baseURL;
 if (
@@ -20,7 +21,7 @@ const api = axios.create({
 api.interceptors.request.use(
     config => {
         if (config.requireToken) {
-            const user = localStorage.getItem('LOGIN_USER_KEY') ? JSON.parse(localStorage.getItem('LOGIN_USER_KEY')) : null;
+            const user = localStorage.getItem(LOGIN_USER_KEY) ? JSON.parse(localStorage.getItem(LOGIN_USER_KEY)) : null;
             config.headers.common['Authorization'] = user.token;
         }
 

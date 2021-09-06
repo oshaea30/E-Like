@@ -56,7 +56,7 @@ const SignIn = () => {
               placeholder="Password"
             />
             <button type="button" onClick={signInHandler} className="btn">
-              {isLoading ? "Signing up..." : "Sign Up"}
+              {isLoading ? "Signing in..." : "Sign In"}
             </button>
             <Link to="/sign-up">Create an account? Sign Up</Link>
           </form>

@@ -2,7 +2,7 @@ import API from "../../API";
 import { fetchUsersAction, signInAction, signUpAction } from "./actions";
 
 const api = new API();
-const LOGIN_USER_KEY = "LOGIN_USER_KEY";
+const LOGIN_USER_KEY = "E_LIKE_LOGIN_USER_KEY";
 
 export const fetchUsers = () => {
     return async (dispatch) => {
