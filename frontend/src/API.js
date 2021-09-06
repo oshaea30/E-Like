@@ -57,11 +57,26 @@ export default class API {
         const response = await api
             .get('/users/')
             .then((response) => {
-                return response.data
+                return response.data;
             })
             .catch((err) => {
-                throw new Error(err)
+                throw new Error(err);
+            });
+        return response;
+    }
+
+    // likes
+    addLike = async (receive_user_id) => {
+        const formData = new FormData();
+        formData.append("receive_user_id", receive_user_id);
+        const savedLike = await api
+            .post("/likes/add/", formData)
+            .then((response) => {
+                return response.data;
             })
-        return response
+            .catch((error) => {
+                throw new Error(error);
+            });
+        return savedLike;
     }
 }

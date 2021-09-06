@@ -136,7 +136,6 @@ select::-ms-expand {
 }
 
 .home .swipe-container {
-  /* position: absolute; */
   height: 100vh;
   max-width: 100vw;
 }
@@ -145,21 +144,27 @@ select::-ms-expand {
   position: absolute;
   top: 70px;
   bottom: 20px;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
   padding: 30px 20px;
   background-color: #fff;
+  max-width: 460px;
+  min-height: calc(100vh - 120px);
 }
 
 .home .swipe .swipe-main {
   width: 100%;
 }
 
-.home .swipe .swipe-cross {
+.home .swipe-cross {
   position: absolute;
   bottom: 40px;
   left: 30px;
 }
 
-.home .swipe .swipe-heart {
+.home .swipe-heart {
   position: absolute;
   bottom: 40px;
   right: 30px;
@@ -314,4 +319,16 @@ select::-ms-expand {
   background-color: #e4e4e4;
   color: #9b9b9b;
   border: 0;
+}
+
+.nouser-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.nouser-container h3 {
+  color: gray;
 }

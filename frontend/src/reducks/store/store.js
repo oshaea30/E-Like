@@ -8,7 +8,7 @@ import {connectRouter, routerMiddleware} from "connected-react-router";
 import thunk from 'redux-thunk';
 
 import { PostsReducer } from '../posts/reducers';
-import { UsersReducer } from '../users/reducers'
+import { UsersReducer } from '../users/reducers';
 
 export default function createStore(history) {
     return reduxCreateStore(
@@ -25,5 +25,5 @@ export default function createStore(history) {
         // DEBUG MODE
         // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
        )
-    )
+    );
 }
