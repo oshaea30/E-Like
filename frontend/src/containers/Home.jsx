@@ -25,6 +25,7 @@ const Home = () => {
   
   useEffect(() => {
     dispatch(fetchUsers());
+    // eslint-disable-next-line
   }, []);
 
   const childRefs = useMemo(() => Array(users.length).fill(0).map(i => React.createRef()), [users]);

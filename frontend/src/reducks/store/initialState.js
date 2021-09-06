@@ -3,8 +3,9 @@ const initialState = {
         list: []
     },
     users: {
-        list: []
+        list: [],
+        current_user: {}
     }
 };
 
-export default initialState
+export default initialState;
