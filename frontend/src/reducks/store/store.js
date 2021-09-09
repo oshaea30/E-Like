@@ -10,6 +10,7 @@ import thunk from 'redux-thunk';
 import { PostsReducer } from '../posts/reducers';
 import { UsersReducer } from '../users/reducers';
 import { MatchesReducer } from '../matches/reducers';
+import { ChatsReducer } from '../chats/reducers';
 
 export default function createStore(history) {
     return reduxCreateStore(
@@ -17,7 +18,8 @@ export default function createStore(history) {
             router: connectRouter(history),
             posts: PostsReducer,
             users: UsersReducer,
-            matches: MatchesReducer
+            matches: MatchesReducer,
+            chats: ChatsReducer,
        }),
        compose(
         applyMiddleware(

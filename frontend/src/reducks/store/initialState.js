@@ -8,6 +8,12 @@ const initialState = {
     },
     matches: {
         list: []
+    },
+    chats: {
+        results: [],
+        count: 0,
+        next: null,
+        previous: null,
     }
 };
 

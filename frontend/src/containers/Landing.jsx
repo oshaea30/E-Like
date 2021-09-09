@@ -15,7 +15,7 @@ const Landing = () => {
   return (
     <React.Fragment>
       <div className="landing-page">
-        <div className="content">
+        <div className="landing-content">
           <img src={logo} alt="E-link Logo" />
           <h1>E-like</h1>
           <p>
