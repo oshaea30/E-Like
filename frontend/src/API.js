@@ -133,4 +133,19 @@ export default class API {
             });
         return savedLike;
     }
+
+    // matches
+    getMatches = async () => {
+        const response = await api
+            .get('/matches/', {
+                requireToken: true
+            })
+            .then((response) => {
+                return response.data;
+            })
+            .catch((err) => {
+                throw new Error(err);
+            });
+        return response;
+    }
 }

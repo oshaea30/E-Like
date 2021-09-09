@@ -5,6 +5,7 @@ import Home from "./containers/Home";
 import Landing from "./containers/Landing";
 import SignIn from "./containers/SignIn";
 import SignUp from "./containers/Signup";
+import Match from "./containers/Match";
 import { fetchUserFromLocalStorage } from "./reducks/users/operations";
 import { getUser } from "./reducks/users/selectors";
 
@@ -24,6 +25,7 @@ const Router = () => {
         <Route exact path={"/"} component={token ? Home : Landing} />
         <Route exact path={"/sign-up"} component={token ? Home : SignUp} />
         <Route exact path={"/sign-in"} component={token ? Home : SignIn} />
+        <Route exact path={"/matches"} component={token ? Match : SignIn} />
       </Switch>
     </>
   );

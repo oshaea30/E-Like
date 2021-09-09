@@ -9,7 +9,7 @@ class Chat(models.Model):
         db_table = 'chat'
 
     match_id = models.ForeignKey(
-        Match, on_delete=CASCADE, db_index=True
+        Match, related_name='chats', on_delete=CASCADE, db_index=True
     )
     send_user_id = models.ForeignKey(
         User, related_name='related_send_message_user_id', on_delete=CASCADE, db_index=True
@@ -26,3 +26,6 @@ class Chat(models.Model):
     updated_at = models.DateTimeField(
         "Update Date", blank=True, auto_now=True
     )
+
+    def __str__(self):
+        return self.body

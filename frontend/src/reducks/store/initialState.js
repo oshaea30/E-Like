@@ -5,6 +5,9 @@ const initialState = {
     users: {
         list: [],
         current_user: {}
+    },
+    matches: {
+        list: []
     }
 };
 

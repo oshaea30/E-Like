@@ -24,6 +24,7 @@ class LikeAdd(CustomLoginRequiredMixin, generics.CreateAPIView):
             return response
 
         # Set the user who login
+        request.data._mutable = True
         request.data['send_user_id'] = request.login_user.id
 
         # In case, the counterpart had liked the login user

@@ -1,15 +1,14 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import TinderCard from 'react-tinder-card';
-import NoUsers from "../components/home/NoUsers";
+import Empty from "../components/default/Empty";
+import Header from "../components/default/Header";
 import { fetchUsers } from './../reducks/users/operations';
 import { getUsers } from "../reducks/users/selectors";
 import { addLike  } from "../reducks/likes/operations";
 
 import crossIcon from "./../../src/assets/img/icon-cross.svg";
 import heartIcon from "./../assets/img/icon-heart.svg";
-import menuIcon from "./../assets/img/icon.svg";
-import chatIcon from "./../assets/img/icon-chat.svg";
 
 const DIRECTION_RIGHT = 'right';
 const DIRECTION_LEFT = 'left';
@@ -50,11 +49,7 @@ const Home = () => {
 
   return (
     <div className="home">
-      <header>
-        <img src={menuIcon} alt="menu icon" />
-        <img src={chatIcon} alt="chat icon" />
-      </header>
-
+      <Header />
       <div className="swipe-container">
         { users.length > 0 ?
           users.map( (user, index) => {
@@ -68,14 +63,14 @@ const Home = () => {
                 </div>
             </TinderCard> )
           }) : 
-          <NoUsers />
+          <Empty message="Can not find users. Please try later."/>
         }
         { users.length && !isLastUser ? 
           <>
             <img src={crossIcon} className="swipe-cross" onClick={() => swipe(DIRECTION_LEFT)}  alt="" />
             <img src={heartIcon} className="swipe-heart" onClick={() => swipe(DIRECTION_RIGHT)}  alt="" />
           </>
-          : <NoUsers />
+          : <Empty message="No more users"/>
         }
       </div>
     </div>
