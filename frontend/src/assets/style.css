@@ -326,6 +326,10 @@ select::-ms-expand {
   margin: 0;
 }
 
+.matches ul a {
+  text-decoration: none;
+}
+
 .matches ul li {
   padding: 20px;
   border-bottom: 1px solid #fcf9f9;
