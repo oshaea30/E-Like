@@ -15,6 +15,11 @@ export const ChatsReducer = (state = initialState.chats, action) => {
                 ...state,
                 results: [...state.results, action.payload.chat]
             };
+        case Actions.RESET_CHAT:
+            return {
+                ...state,
+                results: []
+            };
         default:
             return state;
     }

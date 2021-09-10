@@ -13,3 +13,10 @@ export const addChatAction = (chat) => {
         payload: { chat }
     }
 }
+
+export const RESET_CHAT = "RESET_CHAT";
+export const resetChatAction = () => {
+    return {
+        type: "RESET_CHAT"
+    }
+}

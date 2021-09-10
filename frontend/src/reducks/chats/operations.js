@@ -1,5 +1,5 @@
 import API from '../../API';
-import { addChatAction, fetchChatsAction } from './actions';
+import { addChatAction, fetchChatsAction, resetChatAction } from './actions';
 
 const api = new API();
 
@@ -12,6 +12,10 @@ export const fetchChats = (matchId, page) => {
                 alert("Failed to connect API: /chats/")
             });
     }
+}
+
+export const resetChats = () => {
+    return resetChatAction()
 }
 
 export const addChat = (chatBody) => {

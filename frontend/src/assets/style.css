@@ -11,8 +11,6 @@ body {
 .content {
   max-width: 430px;
   margin: 0px auto;
-  /* min-height: 800px; */
-  /* padding-top: 59px; */
   flex-direction: column;
   display: flex;
   height: 100vh;
@@ -187,6 +185,7 @@ header.chat {
 header img {
   width: 30px;
   padding: 15px;
+  cursor: pointer;
 }
 
 header .name {
