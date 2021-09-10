@@ -32,7 +32,7 @@ api.interceptors.request.use(
     }
 )
 
-export default class API { 
+export default class API {
 
     getPosts = async () => {
         const posts = await api
@@ -132,5 +132,55 @@ export default class API {
                 throw new Error(error);
             });
         return savedLike;
+    }
+
+    // matches
+    getMatches = async () => {
+        return api
+            .get('/matches/', {
+                requireToken: true
+            })
+            .then((response) => {
+                return response.data;
+            })
+            .catch((error) => {
+                throw new Error(error);
+            });
+    }
+
+    // chats
+    getChats = async (matchId, page) => {
+        return await api
+            .get('/chats/', {
+                params: { 'match_id': matchId, page },
+                requireToken: true,
+            })
+            .then((response) => {
+                response.data.results.reverse();
+                return response.data;
+            })
+            .catch((err) => {
+                throw new Error(err);
+            });
+    }
+
+    addChat = async (chatBody) => {
+        const { body, matchId } = chatBody
+        const formData = new FormData();
+
+        formData.append("body", body);
+        formData.append("match_id", matchId);
+
+        const savedChat = await api
+            .post("/chats/add/", formData, {
+                requireToken: true
+            })
+            .then((response) => {
+                return response.data;
+            })
+            .catch((error) => {
+                throw new Error(error);
+            });
+        return savedChat;
     }
 }

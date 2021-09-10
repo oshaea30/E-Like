@@ -1,40 +1,36 @@
-<body>
-    <div class="matches">
-      <header>
-        <img src="img/icon-gray.svg" alt="" />
-        <img src="img/icon-chat-green.svg" alt="" />
-      </header>
-      <div class="content">
-        <ul>
-          <li>
-            <img src="img/sample-user-1.png" alt="" />
-            <div class="right">
-              <div class="name">Jessica Park</div>
-              <div class="message">Matched!! · Feb 03</div>
-            </div>
-          </li>
-          <li>
-            <img src="img/sample-user-2.png" alt="" />
-            <div class="right">
-              <div class="name">Jessica Park</div>
-              <div class="message">Matched!! · Feb 03</div>
-            </div>
-          </li>
-          <li>
-            <img src="img/sample-user-3.png" alt="" />
-            <div class="right">
-              <div class="name">Jessica Park</div>
-              <div class="message">Matched!! · Feb 03</div>
-            </div>
-          </li>
-          <li>
-            <img src="img/sample-user-4.png" alt="" />
-            <div class="right">
-              <div class="name">Jessica Park</div>
-              <div class="message">Matched!! · Feb 03</div>
-            </div>
-          </li>
-        </ul>
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getMatches } from "../reducks/matches/selectors";
+import { fetchMatches } from "../reducks/matches/operations";
+import Header from "../components/default/Header";
+import MatchList from "../components/match/MatchList";
+import Empty from "../components/default/Empty";
+
+import chatIcon from "./../assets/img/icon-chat.svg";
+
+const Match = () => {
+
+  const dispatch = useDispatch();
+  const selector = useSelector((state) => state);
+  const matches = getMatches(selector);
+
+  useEffect(() => {
+    dispatch(fetchMatches());
+    // eslint-disable-next-line
+  }, []);
+
+  return (
+    <>
+      <div className="matches">
+        <Header />
+        {matches.length > 0 ?
+          <MatchList list={matches} />
+          : <Empty  icon={chatIcon} message="You haven't matched yet. Let's send likes"/>
+        }
+
       </div>
-    </div>
-  </body>
+    </>
+  )
+}
+
+export default Match;

@@ -9,13 +9,17 @@ import thunk from 'redux-thunk';
 
 import { PostsReducer } from '../posts/reducers';
 import { UsersReducer } from '../users/reducers';
+import { MatchesReducer } from '../matches/reducers';
+import { ChatsReducer } from '../chats/reducers';
 
 export default function createStore(history) {
     return reduxCreateStore(
         combineReducers({
             router: connectRouter(history),
             posts: PostsReducer,
-            users: UsersReducer
+            users: UsersReducer,
+            matches: MatchesReducer,
+            chats: ChatsReducer,
        }),
        compose(
         applyMiddleware(
