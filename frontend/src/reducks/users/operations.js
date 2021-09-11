@@ -1,5 +1,5 @@
 import API from "../../API";
-import { fetchUsersAction, signInAction, signUpAction } from "./actions";
+import { fetchUsersAction, signInAction, signUpAction, signOutAction } from "./actions";
 
 const api = new API();
 const LOGIN_USER_KEY = "E_LIKE_LOGIN_USER_KEY";
@@ -52,4 +52,11 @@ export const signIn = (signInBody) => {
         console.log(error);
       });
   };
+};
+
+export const signOut = () => {
+  return (dispatch) => {
+    localStorage.removeItem(LOGIN_USER_KEY);
+    dispatch(signOutAction());
+  }
 };
