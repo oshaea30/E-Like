@@ -6,7 +6,8 @@ export const UsersReducer = (state = initialState.users, action) => {
     case Actions.FETCH_USERS:
       return {
         ...state,
-        list: action.payload.results
+        ...action.payload,
+        results: [...action.payload.results, ...state.results],
       }
     case Actions.SIGN_UP:
       return {
