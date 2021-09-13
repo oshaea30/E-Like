@@ -4,7 +4,7 @@ import { addChatAction, fetchChatsAction, resetChatAction } from './actions';
 const api = new API();
 
 export const fetchChats = (matchId, page) => {
-    return async (dispatch) => {
+    return (dispatch) => {
         return api.getChats(matchId, page)
             .then((chats) => {
                 dispatch(fetchChatsAction(chats))
@@ -19,7 +19,7 @@ export const resetChats = () => {
 }
 
 export const addChat = (chatBody) => {
-    return async (dispatch) => {
+    return (dispatch) => {
         return api.addChat(chatBody)
             .then((chats) => {
                 dispatch(addChatAction(chats))

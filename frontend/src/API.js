@@ -149,8 +149,8 @@ export default class API {
     }
 
     // chats
-    getChats = async (matchId, page) => {
-        return await api
+     getChats = (matchId, page) => {
+        return api
             .get('/chats/', {
                 params: { 'match_id': matchId, page },
                 requireToken: true,
@@ -164,14 +164,14 @@ export default class API {
             });
     }
 
-    addChat = async (chatBody) => {
+    addChat = (chatBody) => {
         const { body, matchId } = chatBody
         const formData = new FormData();
 
         formData.append("body", body);
         formData.append("match_id", matchId);
 
-        const savedChat = await api
+        return api
             .post("/chats/add/", formData, {
                 requireToken: true
             })
@@ -181,6 +181,5 @@ export default class API {
             .catch((error) => {
                 throw new Error(error);
             });
-        return savedChat;
     }
 }

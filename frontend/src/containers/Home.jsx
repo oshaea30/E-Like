@@ -20,7 +20,7 @@ const Home = () => {
   const selector = useSelector((state) => state);
   const users = getUsers(selector);
 
-  const [isLastUser, setIsLastUser] = useState(false);
+  const [isLastUser, setIsLastUser] = useState(users.length > 0);
   
   useEffect(() => {
     dispatch(fetchUsers());
@@ -70,7 +70,7 @@ const Home = () => {
             <img src={crossIcon} className="swipe-cross" onClick={() => swipe(DIRECTION_LEFT)}  alt="" />
             <img src={heartIcon} className="swipe-heart" onClick={() => swipe(DIRECTION_RIGHT)}  alt="" />
           </>
-          : <Empty message="No more users"/>
+          : (isLastUser ? <Empty message="No more users"/> : null)
         }
       </div>
     </div>
