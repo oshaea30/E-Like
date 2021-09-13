@@ -1,12 +1,12 @@
 import API from "../../API";
-import { fetchUsersAction, signInAction, signUpAction, removeUserAction } from "./actions";
+import { fetchUsersAction, signInAction, signUpAction, signOutAction, removeUserAction } from "./actions";
 
 const api = new API();
 const LOGIN_USER_KEY = "E_LIKE_LOGIN_USER_KEY";
 
-export const fetchUsers = () => {
+export const fetchUsers = (params = {}) => {
     return async (dispatch) => {
-        return api.getUsers()
+        return api.getUsers(params)
             .then((users) => {
                 dispatch(fetchUsersAction(users))
             }).catch((error) => {
@@ -54,7 +54,14 @@ export const signIn = (signInBody) => {
   };
 };
 
-export const signIn = (id) => {
+export const signOut = () => {
+  return (dispatch) => {
+    localStorage.removeItem(LOGIN_USER_KEY);
+    dispatch(signOutAction());
+  }
+};
+
+export const removeUser = (id) => {
   return (dispatch) => {
     dispatch(removeUserAction(id));
   }

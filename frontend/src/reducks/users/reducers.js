@@ -6,7 +6,8 @@ export const UsersReducer = (state = initialState.users, action) => {
         case Actions.FETCH_USERS:
             return {
                 ...state,
-                list: action.payload.results
+                ...action.payload,
+                results: [...action.payload.results, ...state.results],
             }
         case Actions.SIGN_UP:
             return {
@@ -18,10 +19,15 @@ export const UsersReducer = (state = initialState.users, action) => {
                 ...state,
                 current_user: action.payload,
             };
+        case Actions.SIGN_OUT:
+            return {
+                ...state,
+                current_user: {},
+            };
         case Actions.REMOVE_USER:
             return {
                 ...state,
-                current_user: action.payload,
+                results: state.results.filter((item) => item.id !== action.payload.id)
             };
         default:
             return state;
