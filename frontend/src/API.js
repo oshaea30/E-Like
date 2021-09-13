@@ -103,9 +103,10 @@ export default class API {
                 throw new Error(error);
             });
     };
-    getUsers = async () => {
+    getUsers = async (params = {}) => {
         const response = await api
             .get('/users/', {
+                params,
                 requireToken: true
             })
             .then((response) => {

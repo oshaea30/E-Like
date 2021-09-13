@@ -4,9 +4,9 @@ import { fetchUsersAction, signInAction, signUpAction, signOutAction } from "./a
 const api = new API();
 const LOGIN_USER_KEY = "E_LIKE_LOGIN_USER_KEY";
 
-export const fetchUsers = () => {
+export const fetchUsers = (params = {}) => {
     return async (dispatch) => {
-        return api.getUsers()
+        return api.getUsers(params)
             .then((users) => {
                 dispatch(fetchUsersAction(users))
             }).catch((error) => {

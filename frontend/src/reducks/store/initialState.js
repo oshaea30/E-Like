@@ -3,7 +3,10 @@ const initialState = {
         list: []
     },
     users: {
-        list: [],
+        results: [],
+        count: 0,
+        next: null,
+        previous: null,
         current_user: {}
     },
     matches: {
