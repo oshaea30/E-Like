@@ -18,7 +18,6 @@ const Match = () => {
 
     const observer = useRef();
     const lastMatchElementRef = useCallback(node => {
-        console.log(node);
         if (observer.current) observer.current.disconnect();
         observer.current = new IntersectionObserver(entries => {
             if (entries[0].isIntersecting && matches.next) {
