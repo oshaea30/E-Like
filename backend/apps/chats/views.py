@@ -1,3 +1,5 @@
+from django.db.models.query_utils import Q
+from rest_framework.filters import BaseFilterBackend
 from apps.matches.models import Match
 from apps.users.models import User
 from rest_framework import generics
@@ -10,10 +12,26 @@ from django_filters.rest_framework import DjangoFilterBackend
 from apps.users.mixins import CustomLoginRequiredMixin
 
 
+class CustomizeFilterBackend(BaseFilterBackend):
+    """
+    Customize filter fields.
+    """
+    def filter_queryset(self, request, queryset, view):
+        # More customize field to filter goes here
+        chat_id = request.query_params.get("chat_id", None)
+
+        # Declare dict for filter
+        kwargs = {}
+
+        # Filter chat ID less than lastest chat ID (Prevent duplicated chat)
+        if chat_id: kwargs['id__lt'] = chat_id
+
+        return queryset.filter(**kwargs)
+
 class ChatList(CustomLoginRequiredMixin, generics.ListAPIView):
     queryset = Chat.objects.order_by('-id').all()
     serializer_class = ChatSerializer
-    filter_backends = [DjangoFilterBackend]
+    filter_backends = [DjangoFilterBackend, CustomizeFilterBackend]
     filterset_fields = ['match_id']
 
     def get(self, request, *args, **kwargs):
@@ -27,7 +45,7 @@ class ChatList(CustomLoginRequiredMixin, generics.ListAPIView):
             response.accepted_media_type = "application/json"
             response.renderer_context = {}
             return response
-
+        
         return self.list(request, *args, **kwargs)
 
 

@@ -3,9 +3,9 @@ import { addChatAction, fetchChatsAction, resetChatAction } from './actions';
 
 const api = new API();
 
-export const fetchChats = (matchId, page) => {
+export const fetchChats = (query) => {
     return (dispatch) => {
-        return api.getChats(matchId, page)
+        return api.getChats(query)
             .then((chats) => {
                 dispatch(fetchChatsAction(chats))
             }).catch((error) => {

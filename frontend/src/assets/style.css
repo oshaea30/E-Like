@@ -365,7 +365,7 @@ select::-ms-expand {
 .chat {
 }
 
-.chat div#scrollableDiv{
+.chat .scroll-div{
   padding-top: 40px;
   padding-left: 0px;
   overflow: auto;
@@ -479,12 +479,12 @@ select::-ms-expand {
 
 
 /* Hide scrollbar for Chrome, Safari and Opera */
-#scrollableDiv::-webkit-scrollbar {
+.scroll-div::-webkit-scrollbar {
   display: none;
 }
 
 /* Hide scrollbar for IE, Edge and Firefox */
-#scrollableDiv {
+.scroll-div {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }

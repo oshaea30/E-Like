@@ -21,6 +21,10 @@ python manage.py makemigrations
 python manage.py migrate
 python manage.py runserver
 # Open http://127.0.0.1:8000/users/
+
+# To have dummy data for testing run:
+python manage.py fixtures/dummy-data.json
+
 ```
 3. Frontend setting
 ```
