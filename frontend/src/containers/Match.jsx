@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState, useCallback, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getMatches } from "../reducks/matches/selectors";
 import { fetchMatches } from "../reducks/matches/operations";
@@ -10,27 +10,52 @@ import chatIcon from "./../assets/img/icon-chat.svg";
 
 const Match = () => {
 
-  const dispatch = useDispatch();
-  const selector = useSelector((state) => state);
-  const matches = getMatches(selector);
+    const dispatch = useDispatch();
+    const selector = useSelector((state) => state);
+    const matches = getMatches(selector);
 
-  useEffect(() => {
-    dispatch(fetchMatches());
-    // eslint-disable-next-line
-  }, []);
+    let [page, setPage] = useState(1);
 
-  return (
-    <>
-      <div className="matches">
-        <Header />
-        {matches.length > 0 ?
-          <MatchList list={matches} />
-          : <Empty  icon={chatIcon} message="You haven't matched yet. Let's send likes"/>
+    const observer = useRef();
+    const lastMatchElementRef = useCallback(node => {
+        console.log(node);
+        if (observer.current) observer.current.disconnect();
+        observer.current = new IntersectionObserver(entries => {
+            if (entries[0].isIntersecting && matches.next) {
+                setPage(++page);
+                dispatch(fetchMatches({ page }));
+            }
+        });
+        if (node) observer.current.observe(node);
+    }, [matches.next]);
+
+    useEffect(() => {
+        if (matches && matches.results.length === 0) {
+            dispatch(fetchMatches({ page }));
         }
+        // eslint-disable-next-line
+    }, []);
 
-      </div>
-    </>
-  )
+    return (
+        <>
+            <div className="matches">
+                <Header />
+                {matches.results.length > 0 ?
+                    <ul>
+                        {matches.results.map((match, index) => {
+                            return <MatchList
+                                match={match}
+                                key={match.id}
+                                innerRef={matches.results.length === index + 1 ? lastMatchElementRef : null}
+                            />
+                        })}
+                    </ul>
+                    : <Empty icon={chatIcon} message="You haven't matched yet. Let's send likes" />
+                }
+
+            </div>
+        </>
+    )
 }
 
 export default Match;
