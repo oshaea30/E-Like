@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { createRef, useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
@@ -14,9 +14,9 @@ import chatIcon from "./../assets/img/icon-chat.svg";
 const Chat = (props) => {
     const dispatch = useDispatch();
     const selector = useSelector((state) => state);
+    const chatRef = createRef()
     let history = useHistory();
 
-    let [page, setPage] = useState(1);
     const [hasMoreItems, setHasMoreItems] = useState(true);
     const [body, setBody] = useState("");
 
@@ -25,17 +25,19 @@ const Chat = (props) => {
 
     const matchId = props.match.params.id;
 
+    // Use last chat ID instead of for to filter chat list (Prevent duplicate chat in redux store)
+    const lastChats = chats.results[0];
+    const chatId = lastChats ? lastChats.id : null;
+
     useEffect(() => {
         dispatch(resetChats());
-        dispatch(fetchChats(matchId, page));
-
+        dispatch(fetchChats({ matchId, chatId }));
         // eslint-disable-next-line
     }, []);
 
     const onNextChat = () => {
         if (!chats.next) return setHasMoreItems(false);
-        setPage(++page);
-        dispatch(fetchChats(matchId, page));
+        dispatch(fetchChats({ matchId, chatId }));
     };
 
     const handleBodyChange = (e) => {
@@ -44,6 +46,10 @@ const Chat = (props) => {
 
     const bodyChatHandler = async () => {
         if (!body.trim()) return;
+
+        // back to the bottom of the chat when send new chat
+        chatRef.current.scrollTop = chatRef.current.scrollHeight;
+
         await dispatch(addChat({ body, matchId }));
         setBody("");
     };
@@ -53,7 +59,7 @@ const Chat = (props) => {
         history.push("/matches");
     };
 
-    //? Handle when user click enter type. keyCode 13 => Enter Key
+    // Handle when user click enter type. keyCode 13 => Enter Key
     const onTypeEnter = (event) => {
         if (event.keyCode === 13) {
             event.preventDefault();
@@ -70,7 +76,12 @@ const Chat = (props) => {
                 </header>
 
                 <div className="content">
-                    <div id="scrollableDiv" style={{ overflow: "auto", display: "flex", flexDirection: "column-reverse" }}>
+                    <div
+                        ref={chatRef}
+                        id="scrollableDiv"
+                        className="scroll-div"
+                        style={{ overflow: "auto", display: "flex", flexDirection: "column-reverse" }}
+                    >
                         <InfiniteScroll
                             dataLength={chats.results.length} // Set the length of the data
                             next={onNextChat} // Function to be called to fetches the next data
@@ -81,7 +92,7 @@ const Chat = (props) => {
                         >
                             <ul>
                                 {
-                                    chats.results.length > 0 
+                                    chats.results.length > 0
                                         ? chats.results.map((chat) => <ChatList key={chat.id} data={{ chat, userId: user.id }} />)
                                         : <Empty icon={chatIcon} message="No chats here yet..." />
                                 }

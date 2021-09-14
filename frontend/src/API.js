@@ -150,10 +150,11 @@ export default class API {
     }
 
     // chats
-     getChats = (matchId, page) => {
+    getChats = (query) => {
+        const { matchId, chatId } = query;
         return api
-            .get('/chats/', {
-                params: { 'match_id': matchId, page },
+            .get("/chats/", {
+                params: { match_id: matchId, chat_id: chatId },
                 requireToken: true,
             })
             .then((response) => {
@@ -163,10 +164,10 @@ export default class API {
             .catch((err) => {
                 throw new Error(err);
             });
-    }
+    };
 
     addChat = (chatBody) => {
-        const { body, matchId } = chatBody
+        const { body, matchId } = chatBody;
         const formData = new FormData();
 
         formData.append("body", body);
@@ -174,7 +175,7 @@ export default class API {
 
         return api
             .post("/chats/add/", formData, {
-                requireToken: true
+                requireToken: true,
             })
             .then((response) => {
                 return response.data;
@@ -182,5 +183,5 @@ export default class API {
             .catch((error) => {
                 throw new Error(error);
             });
-    }
+    };
 }
