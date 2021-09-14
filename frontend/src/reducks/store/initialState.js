@@ -1,4 +1,4 @@
-const initialState = { 
+const initialState = {
     posts: {
         list: []
     },
@@ -10,7 +10,10 @@ const initialState = {
         current_user: {}
     },
     matches: {
-        list: []
+        results: [],
+        count: 0,
+        next: null,
+        previous: null,
     },
     chats: {
         results: [],

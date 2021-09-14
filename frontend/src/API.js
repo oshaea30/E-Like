@@ -136,9 +136,10 @@ export default class API {
     }
 
     // matches
-    getMatches = async () => {
+    getMatches = async (params = {}) => {
         return api
             .get('/matches/', {
+                params,
                 requireToken: true
             })
             .then((response) => {

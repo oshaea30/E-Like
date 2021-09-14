@@ -8,36 +8,32 @@ const MatchList = (props) => {
     const user = getUser(selector);
 
     const formatDate = (date) => {
-        return new Date(date).toLocaleString('en-US', {month: 'short', day: '2-digit'})
+        return new Date(date).toLocaleString('en-US', { month: 'short', day: '2-digit' })
     }
 
+    let match = props.match;
+    let partnerName = match.user_id_1.id !== user.id ? match.user_id_1.username : match.user_id_2.username;
+
     return (
-        <ul>
-            {
-                props.list.map(item => {
-                    let partnerName = item.user_id_1.id !== user.id ? item.user_id_1.username : item.user_id_2.username;
-                    return (
-                        <Link to={{
-                            pathname:`/matches/${item.id}`,
-                            state: {partnerName}
-                        }} key={item.id} >
-                        <li>
-                            <img src={item.user_id_1.id !== user.id ? item.user_id_1.main_image : item.user_id_2.main_image} alt="profile" />
-                            <div className="right">
-                                <strong className="name">{partnerName}</strong>
-                                { item.latest_chat ?
-                                    <p className="message"> {item.latest_chat.body} &nbsp;
-                                        <span><strong>{formatDate(item.latest_chat.created_at)}</strong></span>
-                                    </p>
-                                    : null
-                                }
-                            </div>
-                        </li>
-                        </Link>
-                    )
-                })
-            }
-        </ul>
+        <Link to={{
+            pathname: `/matches/${match.id}`,
+            state: { partnerName }
+        }}
+            key={match.id}
+            ref={props.innerRef} >
+            <li>
+                <img src={match.user_id_1.id !== user.id ? match.user_id_1.main_image : match.user_id_2.main_image} alt="profile" />
+                <div className="right">
+                    <strong className="name">{partnerName}</strong>
+                    {match.latest_chat ?
+                        <p className="message"> {match.latest_chat.body} &nbsp;
+                            <span><strong>{formatDate(match.latest_chat.created_at)}</strong></span>
+                        </p>
+                        : null
+                    }
+                </div>
+            </li>
+        </Link>
     )
 }
 
