@@ -56,7 +56,7 @@ const Chat = (props) => {
 
     const backHandler = () => {
         dispatch(resetChats());
-        history.push("/matches");
+        history.goBack()
     };
 
     // Handle when user click enter type. keyCode 13 => Enter Key
@@ -102,6 +102,7 @@ const Chat = (props) => {
 
                     <div className="send-message">
                         <textarea
+                            autoFocus
                             value={body}
                             onChange={handleBodyChange}
                             onKeyDown={(e) => onTypeEnter(e)}
