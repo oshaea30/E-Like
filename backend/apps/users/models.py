@@ -11,7 +11,7 @@ class User(models.Model):
         'User Name', blank=False, null=False, max_length=50, db_index=True
     )
     password = models.CharField(
-        'Password', blank=False, null=False, max_length=15, db_index=True
+        'Password', blank=False, null=False, max_length=100, db_index=True
     )
     email = models.EmailField(
         'Email', blank=False, null=False, max_length=100, db_index=True
