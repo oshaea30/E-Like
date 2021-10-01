@@ -7,6 +7,7 @@ import menuIcon from "./../../assets/img/icon-gray.svg";
 import chatIcon from "./../../assets/img/icon-chat.svg";
 import activeChatIcon from "./../../assets/img/icon-chat-green.svg";
 import userIcon from "../../assets/img/icon-user.svg";
+import signOutIcon from "../../assets/img/sign-out-alt-solid.svg";
 
 const Header = () => {
     const dispatch = useDispatch();
@@ -22,7 +23,7 @@ const Header = () => {
         <header>
             <Link to="/"><img src={location.pathname === '/' ? activeMenuIcon : menuIcon} alt="menu icon" /></Link>
             <div>
-                <img src={userIcon} alt="User icon" onClick={() => setIsOpen(!isOpen)} />
+                <img src={signOutIcon} alt="Sign out icon" onClick={() => setIsOpen(!isOpen)} />
                 <Link to="/matches"><img src={location.pathname === '/matches' ? activeChatIcon : chatIcon} alt="chat icon" /></Link>
             </div>
             <div id='custom-modal' className={`custom-modal ${isOpen ? "" : "modal-hide"}`}>
