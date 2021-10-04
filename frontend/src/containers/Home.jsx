@@ -21,7 +21,6 @@ const Home = () => {
   const users = getUsers(selector);
   const userList = users.results;
 
-  let [isLastUser, setIsLastUser] = useState(false);
   let [page, setPage] = useState(1);
   
   useEffect(() => {
@@ -44,12 +43,10 @@ const Home = () => {
     }
     alreadyRemoved.push(receive_user_id);
     let lastUser = userList.filter(user => !alreadyRemoved.includes(user.id)).length === 0;
-    setIsLastUser(lastUser);
     if (lastUser && users.next) {
       // eslint-disable-next-line
       setPage(++page);
       dispatch(fetchUsers({page}));
-      setIsLastUser(false);
     }
   }
   
@@ -81,12 +78,12 @@ const Home = () => {
           }) : 
           <Empty message="Can not find users. Please try later."/>
         }
-        { userList.length && !isLastUser ? 
+        { userList.length > 0 ? 
           <>
             <img src={crossIcon} className="swipe-cross" onClick={() => swipe(DIRECTION_LEFT)}  alt="" />
             <img src={heartIcon} className="swipe-heart" onClick={() => swipe(DIRECTION_RIGHT)}  alt="" />
           </>
-          : (isLastUser ? <Empty message="No more users"/> : null)
+          : null
         }
       </div>
     </div>
