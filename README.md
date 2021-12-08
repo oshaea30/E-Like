@@ -1,5 +1,7 @@
-# E-Like App is an app made to be the tinder for peers. It helps you to find friends with similiar hobbies and interests!
-
+# E-Like App 
+'''
+This is an app made to be the tinder for peers. It helps you to find friends with similiar hobbies and interests!
+'''
 Check out [FRONTEND LIVE DEMO](https://e-like-frontend.herokuapp.com/) here!!
 Check out [API LIVE DEMO](https://e-like-backend.herokuapp.com/) here!!
 ## Tech used
