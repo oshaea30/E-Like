@@ -57,8 +57,8 @@ class UserSignInSerializer(serializers.ModelSerializer):
         if len(user) > 0 and check_password(validated_data['password'], user[0].password):
             # Token
             user[0].token = token_hex(30)
-            # Token expires after 7 days
-            user[0].token_expires = datetime.datetime.now() + datetime.timedelta(days=7)
+            # Token expires after 45 days
+            user[0].token_expires = datetime.datetime.now() + datetime.timedelta(days=45)
             user[0].save()
 
             # Return user information
