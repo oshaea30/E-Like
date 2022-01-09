@@ -72,7 +72,10 @@ const Home = () => {
               onCardLeftScreen={() => outOfFrame(user.id)}
               preventSwipe={['up', 'down']}>
                 <div className="swipe">
-                  <img src={user.main_image} className="swipe-main" alt="" />
+                <h1 className="swipe-name">{user.username}</h1>
+                <img src={user.main_image} className="swipe-main" alt="" />
+                <h2 className="swipe-bio">{user.bio}</h2>
+              
                 </div>
             </TinderCard> )
           }) : 

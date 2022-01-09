@@ -22,6 +22,9 @@ class User(models.Model):
     gender = models.CharField(
         'Gender', blank=False, null=False, db_index=True, max_length=15, choices=GENDER
     )
+    bio = models.CharField(
+        'Biography', blank=True, null=True, db_index=True, max_length=100
+    )
     token = models.CharField(
         'Token', blank=True, null=True, max_length=500, db_index=True
     )

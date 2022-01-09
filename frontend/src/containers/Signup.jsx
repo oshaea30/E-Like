@@ -95,6 +95,14 @@ const SignUp = () => {
               <option value="male">Male</option>
               <option value="female">Female</option>
             </select>
+            <input
+              onChange={handleInputChange}
+              type="text"
+              name="bio"
+              value={values.bio}
+              placeholder="Bio"
+            />
+
             <p>Choose your profile picture</p>
             <input
               type="file"
